@@ -1,4 +1,5 @@
 import opciones
+from rutas import *
 
 campers = {
     "123" : {"Nombres" : "Prueba Prueba","Apellidos":"Prueba Prueba","Direccion":"Cra 22 D # 4 N 60","Acudiente":"Daniela","Tel Celular":"3125698874","Tel Fijo":"6785962","Estado":"","Riesgo":True}
@@ -15,10 +16,51 @@ def registrar_camper(data):
         camper["Acudiente"] = input("Ingrese el nombre del acudiente del camper a registrar: ")
         camper["Tel Celular"] = int(input("Ingrese el numero celular del camper a registrar: "))
         camper["Tel Fijo"] = int(input("Ingrese el numero de telefono fijo del camper a registrar: "))
+        camper["Estado"] = "Inscrito"
+        camper["Riesgo"] = False
+        data[doc] = camper
+        print("-------------------------------------------")
+        print("----- USUARIO REGISTRADO EXITOSAMENTE -----")
+        print("-------------------------------------------")
+    else:
+        print("LO SENTIMOS ESTE CAMPER YA ESTA REGISTRADO EN NUESTRA BASE DE DATOS")
+    print("--------------------------------------------------")
+
+def mostrarcampers(campers, prefijo="- "):
+    for clave, valor in campers.items():
+        if isinstance(valor, dict):
+            print("") 
+            print(f"- Documento : {clave}")
+            mostrarcampers(valor, prefijo)
+        else:
+            print(f"{prefijo}{clave}: {valor}")    
+            
+def ingresarnotas_camper(data):
+    print("-----------------------------------------------")
+    doc = input("Ingrese el documento del camper al cual desea ingresar sus notas: ")
+    camper = data.get(doc, None)
+    if camper != None:
+        camper["Nota Teorica"] = int(input("Porfavor Ingrese la nota teorica del camper: "))
+        camper["Nota Practica"] = int(input("Porfavor Ingrese la nota practica del camper: "))
+        if (camper["Nota Teorica"]+camper["Nota Practica"])/2 >= 60 :
+            camper["Estado"] = "Aprobado"
+            print("EL CAMPER CAMBIO SU ESTADO A APROBADO DEBIDO A SUS NOTAS")
+            camper["Ruta De Entrenamiento"] = asignarruta()
+        else:
+            print("LO SENTIMOS EL CAMPER NO PUDO CAMBIAR SU ESTADO DEBIDO A SUS NOTAS")
+    else:
+        print("ESTE CAMPER NO SE ENCUENTRA REGISTRADO EN CAMPUSLANDS")
+    print("-----------------------------------------------")  
+
+def cambiarestado_camper(data):
+    print("-----------------------------------------------")
+    doc = input("Ingrese el documento del camper al cual desea actualizar su estado: ")
+    camper = data.get(doc, None)
+    if camper != None:
         while True:
             print("---------------------------------------------------")
-            opc = opciones.estadocamper()
-            if opc == (len(opciones.opc_estado)+1):
+            opc = opciones.menuestado()
+            if opc == len(opciones.opc_menuestado)+1:
                 print("Saliendo...")
                 break    
             elif opc == 1:
@@ -40,31 +82,11 @@ def registrar_camper(data):
                 camper["Estado"] = "Expulsado"
                 break
             elif opc == 7:
-                camper["Estado"] = "Retirado"
-                break
-        camper["Riesgo"] = False
-        data[doc] = camper
-        print("----- USUARIO REGISTRADO EXITOSAMENTE -----")
+                camper["Estado"] = "Retirado"   
+                break 
+        print("------------------------------------------------------")
+        print("----- ESTADO DEL CAMPER ACTUALIZADO EXITOSAMENTE -----")
+        print("------------------------------------------------------")
     else:
-        print("LO SENTIMOS ESTE CAMPER YA ESTA REGISTRADO EN NUESTRA BASE DE DATOS")
-    print("--------------------------------------------------")
-
-def mostrarcampers(campers, prefijo="- "):
-    for clave, valor in campers.items():
-        if isinstance(valor, dict):
-            print("") 
-            print(f"- Documento : {clave}")
-            mostrarcampers(valor, prefijo)
-        else:
-            print(f"{prefijo}{clave}: {valor}")    
-            
-def ingresarnotas_camper(data):
-    print("**************************************************")
-    doc = input("Ingrese el documento del camper al cual desea actualizar su estado: ")
-    camper = data.get(doc, None)
-    if camper != None:
-        camper["Nota Teorica"] = int(input("Porfavor Ingrese la nota teorica del camper: "))
-        print("ESTADO DEL CAMPER ACTUALIZADO EXITOSAMENTE")
-    else:
-        print("Este camper no se encuentra registrado en CAMPUSLANDS")
-    print("**************************************************")  
+        print("ESTE CAMPER NO SE ENCUENTRA REGISTRADO EN CAMPUSLANDS")
+    print("-----------------------------------------------")      
