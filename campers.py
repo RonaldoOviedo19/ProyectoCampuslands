@@ -1,9 +1,6 @@
 import opciones
 from rutas import *
-
-campers = {
-    "123" : {"Nombres" : "Prueba Prueba","Apellidos":"Prueba Prueba","Direccion":"Cra 22 D # 4 N 60","Acudiente":"Daniela","Tel Celular":"3125698874","Tel Fijo":"6785962","Estado":"","Riesgo":True}
-}
+from datos import *
 
 def registrar_camper(data):
     print("--------------------------------------------------")
@@ -19,11 +16,25 @@ def registrar_camper(data):
         camper["Estado"] = "Inscrito"
         camper["Riesgo"] = False
         data[doc] = camper
+        guardar_datos()
         print("-------------------------------------------")
         print("----- USUARIO REGISTRADO EXITOSAMENTE -----")
         print("-------------------------------------------")
     else:
         print("LO SENTIMOS ESTE CAMPER YA ESTA REGISTRADO EN NUESTRA BASE DE DATOS")
+    print("--------------------------------------------------")
+
+def eliminar_camper(data):
+    print("--------------------------------------------------")
+    doc = input("Ingrese el documento del camper que desea eliminar: ")    
+    if data.get(doc, None) != None:
+        del data[doc]
+        guardar_datos()
+        print("-------------------------------------------")
+        print("----- USUARIO ELIMINADO EXITOSAMENTE -----")
+        print("-------------------------------------------")
+    else:
+        print("LO SENTIMOS ESTE CAMPER NO SE ENUENTRA REGISTRADO EN NUESTRA BASE DE DATOS")
     print("--------------------------------------------------")
 
 def mostrarcampers(campers, prefijo="- "):
@@ -33,7 +44,8 @@ def mostrarcampers(campers, prefijo="- "):
             print(f"- Documento : {clave}")
             mostrarcampers(valor, prefijo)
         else:
-            print(f"{prefijo}{clave}: {valor}")    
+            print(f"{prefijo}{clave}: {valor}")            
+               
             
 def ingresarnotas_camper(data):
     print("-----------------------------------------------")
@@ -46,6 +58,7 @@ def ingresarnotas_camper(data):
             camper["Estado"] = "Aprobado"
             print("EL CAMPER CAMBIO SU ESTADO A APROBADO DEBIDO A SUS NOTAS")
             camper["Ruta De Entrenamiento"] = asignarruta()
+            guardar_datos()
         else:
             print("LO SENTIMOS EL CAMPER NO PUDO CAMBIAR SU ESTADO DEBIDO A SUS NOTAS")
     else:
@@ -84,9 +97,21 @@ def cambiarestado_camper(data):
             elif opc == 7:
                 camper["Estado"] = "Retirado"   
                 break 
+        guardar_datos()
         print("------------------------------------------------------")
         print("----- ESTADO DEL CAMPER ACTUALIZADO EXITOSAMENTE -----")
         print("------------------------------------------------------")
     else:
         print("ESTE CAMPER NO SE ENCUENTRA REGISTRADO EN CAMPUSLANDS")
-    print("-----------------------------------------------")      
+    print("-----------------------------------------------")     
+
+def asignarruta_camper(data):
+    print("--------------------------------------------------")
+    doc = input("Ingrese el documento del camper que desea asignarle una ruta de entrenamiento: ")  
+    camper = data.get(doc, None)
+    if camper != None:  
+        camper["Ruta De Entrenamiento"] = asignarruta()
+        guardar_datos()
+    else:
+        print("LO SENTIMOS ESTE CAMPER NO ESTA REGISTRADO EN NUESTRA BASE DE DATOS")
+    print("--------------------------------------------------")     

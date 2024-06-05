@@ -26,9 +26,6 @@ def asignarruta_trainer(data):
     trainer = data.get(doc, None)
     if trainer != None:  
         trainer["Ruta De Entrenamiento"] = asignarruta()
-        print("------------------------------------------")
-        print("------- RUTA ASIGNADA EXITOSAMENTE -------")
-        print("------------------------------------------")
     else:
         print("LO SENTIMOS ESTE TRAINER NO ESTA REGISTRADO EN NUESTRA BASE DE DATOS")
     print("--------------------------------------------------")    

@@ -80,7 +80,7 @@ def asignarruta():
             rut = rutas[7]
             break
     print("------------------------------------------------------")
-    print("----- RUTA ASIGNADA EXITOSAMENTE -----")
+    print("------------- RUTA ASIGNADA EXITOSAMENTE -------------")
     print("------------------------------------------------------")
     return rut
 
