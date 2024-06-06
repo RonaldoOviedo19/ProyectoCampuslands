@@ -10,6 +10,8 @@ opc_menureportes = ("1. Listar los campers que se encuentren en estado de inscri
 
 opc_menucoordi = ("1. Registrar Camper","2. Mostrar los campers registrados","3. Ingresar notas de un Camper","4. Cambiar estado de un camper","5. Agregar nueva ruta de entrenamiento a un camper","6. Eliminar a un camper de la base de datos","7. Agregar nueva ruta de entrenamiento","8. Mostrar rutas de entrenamiento","9. Registrar Trainer","10. Mostrar Trainers","11. Asignar ruta de entrenamiento a un trainer","12. Salir")
 
+opc_menutrainer = ("1. Ingresar las notas de un camper","2. Salir")
+
 opc_menuestado = ("1. En proceso de ingreso","2. Inscrito","3. Aprobado","4. Cursando","5. Graduado","6. Expulsado","7. Retirado")
 
 def menurol():
@@ -22,6 +24,13 @@ def menurol():
 def menucoordi():
     print("Seleccione --->")
     for i in opc_menucoordi:
+        print(i)
+    opc = int(input("Ingrese la opción deseada : "))
+    return opc
+
+def menutrainer():
+    print("Seleccione --->")
+    for i in opc_menutrainer:
         print(i)
     opc = int(input("Ingrese la opción deseada : "))
     return opc
@@ -42,6 +51,7 @@ def menuestado():
 
 def menu_principal():
     cargar_datos()
+    cargar_datostrainer()
     while True:
         print("---------------------------------------------------")
         opc = menurol()
@@ -51,7 +61,15 @@ def menu_principal():
         elif opc == 1:
             print("PERFECTO CAMPER BIENVENIDO A CAMPUSLANDS")
         elif opc == 2:
-            print("PERFECTO TRAINER BIENVENIDO A CAMPUSLANDS")
+            while True:
+                print("---------------------------------------------------")
+                print("BIENVENIDO A CAMPUSLANDS TRAINER")
+                opc = menutrainer()
+                if opc == len(opc_menutrainer):
+                    print("Saliendo...")
+                    break    
+                elif opc == 1:
+                    ingresarnotasmodulo_camper(datos.campers) 
         elif opc == 3:
             while True:
                 print("---------------------------------------------------")
@@ -77,11 +95,11 @@ def menu_principal():
                 elif opc == 8:
                     mostrarrutas()    
                 elif opc == 9:
-                    registrar_trainer(trainers)  
+                    registrar_trainer(datos.trainers)  
                 elif opc == 10:
-                    mostrartrainers(trainers)  
+                    mostrartrainers(datos.trainers)  
                 elif opc == 11:
-                    asignarruta_trainer(trainers) 
+                    asignarruta_trainer(datos.trainers) 
         elif opc == 4:
             while True:
                 print("---------------------------------------------------")
@@ -97,11 +115,16 @@ def menu_principal():
                     listarcampersaprobados(datos.campers)
                     break
                 elif opc == 3:
+                    listartrainers(datos.trainers)
                     break 
                 elif opc == 4:
-                    cambiarestado_camper(campers)
+                    listarcamperbajorendimiento(datos.campers)
+                    break
                 elif opc == 5:
-                    agregarnueva_ruta()   
+                    listarcampers(datos.campers)
+                    print("")
+                    listartrainers(datos.trainers)
+                    break   
                 elif opc == 6:
                     mostrarrutas()    
                 elif opc == 7:

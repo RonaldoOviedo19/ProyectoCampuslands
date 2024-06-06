@@ -1,8 +1,5 @@
 from rutas import *
-
-trainers = {
-    "123" : {"Nombre" : "Prueba","Edad":25,"Tel Celular":"3125698874"}
-}
+from datos import *
 
 def registrar_trainer(data):
     print("--------------------------------------------------")
@@ -13,6 +10,7 @@ def registrar_trainer(data):
         trainer["Edad"] = int(input("Ingrese la edad del trainer a registrar: "))
         trainer["Tel Celular"] = int(input("Ingrese el numero celular del trainer a registrar: "))
         data[doc] = trainer
+        guardar_datostrainer()
         print("-------------------------------------------")
         print("----- TRAINER REGISTRADO EXITOSAMENTE -----")
         print("-------------------------------------------")
@@ -26,6 +24,7 @@ def asignarruta_trainer(data):
     trainer = data.get(doc, None)
     if trainer != None:  
         trainer["Ruta De Entrenamiento"] = asignarruta()
+        guardar_datostrainer()
     else:
         print("LO SENTIMOS ESTE TRAINER NO ESTA REGISTRADO EN NUESTRA BASE DE DATOS")
     print("--------------------------------------------------")    

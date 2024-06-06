@@ -47,9 +47,30 @@ def mostrarcampers(campers, prefijo="- "):
             print(f"{prefijo}{clave}: {valor}")            
                
             
-def ingresarnotas_camper(data):
+def ingresarnotasmodulo_camper(data):
     print("-----------------------------------------------")
     doc = input("Ingrese el documento del camper al cual desea ingresar sus notas: ")
+    camper = data.get(doc, None)
+    if camper != None:
+        camper["Nota Teorica"] = int(input("Porfavor Ingrese la nota teorica del camper: "))
+        camper["Nota Practica"] = int(input("Porfavor Ingrese la nota practica del camper: "))
+        camper["Nota Actividades"] = int(input("Porfavor Ingrese la nota de quizes y trabajos del camper: "))
+        if (camper["Nota Teorica"]*0.3)+(camper["Nota Practica"]*0.6)+(camper["Nota Actividades"]*0.1) >= 60 :
+            print("FELICIDADES EL CAMPER APROBO ESTE MODULO")
+        elif (camper["Nota Teorica"]*0.3)+(camper["Nota Practica"]*0.6)+(camper["Nota Actividades"]*0.1) >= 30:
+            camper["Riesgo"] = True
+            print("LO SENTIMOS EL CAMPER NO PUDO SUPERAR ESTE MODULO POR LO TANTO QUEDA EN RIESGO")
+        elif (camper["Nota Teorica"]*0.3)+(camper["Nota Practica"]*0.6)+(camper["Nota Actividades"]*0.1) < 30:
+            camper["Estado"] = "Expulsado"
+            print("LO SENTIMOS EL CAMPER OBTUVO UN MAL DESEMPEÑO POR LO TANTO QUEDA EXPULSADO") 
+        guardar_datos()   
+    else:
+        print("ESTE CAMPER NO SE ENCUENTRA REGISTRADO EN CAMPUSLANDS")
+    print("-----------------------------------------------")  
+
+def ingresarnotas_camper(data):
+    print("-----------------------------------------------")
+    doc = input("Ingrese el documento del camper al cual desea ingresar sus notas del modulo: ")
     camper = data.get(doc, None)
     if camper != None:
         camper["Nota Teorica"] = int(input("Porfavor Ingrese la nota teorica del camper: "))
@@ -63,7 +84,7 @@ def ingresarnotas_camper(data):
             print("LO SENTIMOS EL CAMPER NO PUDO CAMBIAR SU ESTADO DEBIDO A SUS NOTAS")
     else:
         print("ESTE CAMPER NO SE ENCUENTRA REGISTRADO EN CAMPUSLANDS")
-    print("-----------------------------------------------")  
+    print("-----------------------------------------------") 
 
 def cambiarestado_camper(data):
     print("-----------------------------------------------")

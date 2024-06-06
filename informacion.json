@@ -1,1 +1,30 @@
-{}
+{
+    "100522": {
+        "Nombres": "Ronaldo",
+        "Apellidos": "Oviedo",
+        "Direccion": "Carrera 12",
+        "Acudiente": "Andres",
+        "Tel Celular": 3132428910,
+        "Tel Fijo": 458978,
+        "Estado": "Expulsado",
+        "Riesgo": true,
+        "Nota Teorica": 10,
+        "Nota Practica": 15,
+        "Nota Actividades": 15,
+        "Ruta De Entrenamiento": "Ruta NetCore"
+    },
+    "1005132": {
+        "Nombres": "Ronaldo",
+        "Apellidos": "Oviedo",
+        "Direccion": "Carrera 12",
+        "Acudiente": "Andres",
+        "Tel Celular": 3132428910,
+        "Tel Fijo": 458978,
+        "Estado": "Expulsado",
+        "Riesgo": true,
+        "Nota Teorica": 10,
+        "Nota Practica": 15,
+        "Nota Actividades": 15,
+        "Ruta De Entrenamiento": "Ruta NetCore"
+    }
+}

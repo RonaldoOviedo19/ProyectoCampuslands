@@ -5,7 +5,7 @@ rutas = ["Ruta NodeJS","Ruta Java","Ruta NetCore"]
 nuevasrutas = ["1. Fundamentos de programación","2. Programación Web","3. Programación formal","4. Bases de datos","5. Backend"]
 
 def menuruta():
-    print("Seleccione la ruta de entrenamiento que le desea asignar al camper --->")
+    print("Seleccione la ruta de entrenamiento --->")
     cont = 1
     for i in rutas:
         print(cont,i)
@@ -44,7 +44,7 @@ def agregarnueva_ruta():
             rutas.append("Ruta Backend")
             break
     print("------------------------------------------------------")
-    print("----- RUTA AGREGADA EXITOSAMENTE -----")
+    print("------------- RUTA AGREGADA EXITOSAMENTE -------------")
     print("------------------------------------------------------")
 
 def asignarruta():
